@@ -59,9 +59,15 @@ func Run(searchTerm string) {
 // Register is called to register a matcher for use by the program.
 func Register(feedType string, matcher Matcher) {
 	if _, exists := matchers[feedType]; exists {
-		log.Fatalln(feedType, "Matcher already registered")
+		log.Fatalln(feedType, "匹配器已经注册")
 	}
 
-	log.Println("Register", feedType, "matcher")
+	log.Println("注册", feedType, "匹配器")
 	matchers[feedType] = matcher
+}
+
+// GetMatcher returns the matcher for the specified feed type.
+func GetMatcher(feedType string) (Matcher, bool) {
+	matcher, exists := matchers[feedType]
+	return matcher, exists
 }
